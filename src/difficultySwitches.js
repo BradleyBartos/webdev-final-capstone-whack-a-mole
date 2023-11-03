@@ -10,7 +10,7 @@ export const easyTime = 2 * 60 * 1000;
  *
  */
 export const randomInteger = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.round(Math.random() * (max - min)) + min;
 }
 
 /**
@@ -40,6 +40,9 @@ export const setDelay = (difficulty) => {
   }
 }
 
+/**
+ * Determine the total points needed to win based on the difficulty level.
+ */
 export const setRemainder = (difficulty) => {
   switch(difficulty) {
     case 'hard': 

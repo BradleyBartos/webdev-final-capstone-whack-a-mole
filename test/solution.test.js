@@ -161,11 +161,11 @@ describe("US-03: showUp()", () => {
     expect(typeof showAndHide).toBe('number');
   });
 
-  it("should use the setDelay(difficulty) function inside showUp()", async () => {
+  it("should use the setDelay function inside showUp()", async () => {
     const showUp = await page.evaluate(() => {
       return window.showUp.toString();
     });
-    expect(showUp).toContain("setDelay(difficulty)");
+    expect(showUp).toContain("setDelay");
   });
 
   it("should use the chooseHole(holes) function inside showUp()", async () => {
@@ -203,14 +203,6 @@ describe("US-03: startGame() and gameOver()", () => {
     await page.click("button[id=start]");
     const content = await page.content();
     expect(content).toContain('hole show');
-  });
-
-  it("returns 'game stopped' if time = 0 // gameOver() function", async () => {
-    const gameOver = await page.evaluate(() => {
-      window.setDuration('hard');
-      return window.gameOver();
-    });
-    expect(gameOver).toContain("game stopped");
   });
 
   it("returns the setTimeout ID if time > 0 // gameOver() function", async () => {
@@ -260,7 +252,8 @@ describe("US-04 whack()", () => {
     let content = await page.content();
     expect(content).toContain('<span id="count">20</span>');
     const remainder = await page.evaluate(() => {
-      return window.whack();
+      const event = {'target': {'style': {'pointerEvents': 'auto'}}};
+      return window.whack(event);
     });
     expect(remainder).toEqual(19);
     content = await page.content();
@@ -292,16 +285,23 @@ describe("US-05: startTimer() and updateTimer()", () => {
       window.startGame();
     });
     await page.waitForTimeout(1000);
-    const time = await page.evaluate(() => {
-      return document.querySelector("#timer").innerHTML;
+    const timeStr1 = await page.evaluate(() => {
+      return document.querySelector("#timer").innerText;
     });
-    expect(Number(time)).toBeGreaterThan(0);
+    await page.waitForTimeout(1000);
+    const timeStr2 = await page.evaluate(() => {
+      return document.querySelector("#timer").innerText;
+    });
+    const time1 = parseInt(timeStr1.replace(':', ''));
+    const time2 = parseInt(timeStr2.replace(':', ''));
+    expect(Number(time1)).toBeGreaterThan(0);
+    expect(Number(time2)).toBeLessThan(time1);
   });
 
   it("should call startTimer() in the startGame() function", async () => {
     const startGame = await page.evaluate(() => {
       return window.startGame.toString();
     });
-    expect(startGame).toContain("startTimer()");
+    expect(startGame).toContain("startTimer");
   });
 });

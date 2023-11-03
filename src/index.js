@@ -1,4 +1,5 @@
 import {easyTime, setDuration, setDelay, setRemainder} from './difficultySwitches.js';
+import { startTimer, updateTimer, getTime, setTime } from './timing.js';
 import { loseModal, welcomeModal, winModal } from './modals.js';
 
 const holes = document.querySelectorAll('.hole');
@@ -6,9 +7,8 @@ const moles = document.querySelectorAll('.mole');
 const diffs = document.querySelectorAll('.difficulty');
 const startButton = document.querySelector('#start');
 const count = document.querySelector('#count');
-const timerDisplay = document.querySelector('#timer');
 
-let time = easyTime;
+let lastHole = -1;
 let timer;
 let remainder = 0;
 let difficulty = 'easy';
@@ -17,6 +17,7 @@ let difficulty = 'easy';
 welcomeModal();
 
 // Setup buttons and text
+setTime(easyTime);
 updateTimer();
 clearScore();
 startButton.addEventListener('click', startGame);
@@ -36,7 +37,7 @@ function startGame() {
   clearScore();
 
   setEventListeners();
-  startTimer();
+  timer = startTimer();
   showUp();
   return "game started";
 }
@@ -55,7 +56,8 @@ function setEventListeners() {
  */
 function setDifficulty(selectedDiff) {
   difficulty = selectedDiff;
-  time = setDuration(difficulty);
+  const startTime = setDuration(difficulty);
+  setTime(startTime);
   updateTimer();
   clearScore();
 }
@@ -75,10 +77,19 @@ function setDifficulty(selectedDiff) {
  * chooseHole(holes) //> returns one of the 9 holes that you defined
  */
 function chooseHole(holes) {
-  if (!holes || !holes.length) {
-    throw "No holes found!"
-  }
-  return holes[randomInteger(0, holes.length-1)];
+
+  // get random hole, ensuring it's not the same
+  let ii;
+  do {
+    ii = randomInteger(0, holes.length-1);
+  } while (ii === lastHole)
+  lastHole = ii;
+  const hole = holes[ii]
+  
+  // ensure clicks are enabled
+  hole.querySelector('.mole').style.pointerEvents = 'auto'; 
+
+  return hole;
 }
 
 /**
@@ -95,8 +106,7 @@ function chooseHole(holes) {
 *
 */
 function gameOver() {
-  console.log('Started gameOver with time ' + time);
-  if (time > 0 && remainder > 0) {
+  if (getTime() > 0 && remainder > 0) {
     return showUp();
   } else {
     return stopGame();
@@ -160,56 +170,6 @@ function stopGame() {
   diffs.forEach(button => button.removeAttribute('disabled'));
   clearInterval(timer);
   setDifficulty();
-  return "game stopped";
-}
-
-/**
- * Display losing message
- */
-function loser() {
-  
-}
-
-/**
- * Display winning message
- */
-function winner() {
-
-}
-
-/**
-*
-* Starts the timer using setInterval. For each 1000ms (1 second)
-* the updateTimer function get called. This function is already implemented
-*
-*/
-function startTimer() {
-  timer = setInterval(updateTime, 1000);
-  return timer;
-}
-
-/**
- * 
- * Update the game time and call update timer
- * 
- */
-function updateTime() {
-  time -= 1000;
-  updateTimer();
-
-  return time;
-}
-
-/**
-*
-* Updates the control board with the formated time 
-*
-*/
-function updateTimer() {
-  const sec = time / 1000;
-  const min = parseInt(sec / 60);
-  const displaySec = parseInt(sec % 60).toLocaleString('en-US', {minimumIntegerDigits: 2});
-  timerDisplay.textContent = `${min}:${displaySec}`;
 }
 
 /**
@@ -218,10 +178,11 @@ function updateTimer() {
 * clicks on a mole. The setEventListeners should use this event
 * handler (e.g. mole.addEventListener('click', whack)) for each of
 * the moles.
+* This also disables clicks on the targetted mole to prevent race conditions.
 *
 */
 function whack(event) {
-  event.target.setAttribute('disabled', true);
+  event.target.style.pointerEvents = 'none';
   updateScore();
   return remainder;
 }
@@ -237,7 +198,7 @@ function whack(event) {
 *
 */
 function updateScore() {
-  remainder --;
+  if (remainder > 0) remainder --;
   count.textContent = remainder;
   return remainder;
 }
@@ -268,6 +229,5 @@ window.remainder = remainder;
 window.updateScore = updateScore;
 window.clearScore = clearScore;
 window.whack = whack;
-window.time = time;
 window.toggleVisibility = toggleVisibility;
 window.setEventListeners = setEventListeners;

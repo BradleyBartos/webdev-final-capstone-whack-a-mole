@@ -11,7 +11,7 @@ const winText = 'You cleared enough of those grubs to save the taters.<br>' +
 const winButton = 'Reset Game';
 
 const loseTitle = 'Gosh darn it!';
-const loseText = 'The grubs have bred like, well, bugs and all the taters are eaten.<br>' +
+const loseText = 'The grubs have bred like, well, bugs and all the taters are gone.<br>' +
   'Worst of all, Susie didn\'t lay any eggs. We\'re broke and hungry.'
 const loseButton = 'Try Again';
 

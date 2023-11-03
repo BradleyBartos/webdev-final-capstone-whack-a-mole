@@ -146,22 +146,22 @@ button:active {
   width: 100%;
   background-color: white;
   border: solid 5px #000;
-  border-radius: 5%;
+  border-radius: 50px;
   text-align: center;
-  margin: 10%;
 }
 
 .modal h2 {
-  margin-top: 10%;
+  margin-top: 20px;
   color: #000;
 }
 
 .modal p {
   margin: 5%;
+  font-size: 20px;
 }
 
 #reset {
-  margin-bottom: 5%;
+  margin-bottom: 20px;
 
 }
 
