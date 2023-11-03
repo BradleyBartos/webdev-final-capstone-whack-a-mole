@@ -26,14 +26,25 @@ export const welcomeModal = () => {
   showModal(openTitle, openText, openButton);
 }
 
+/**
+* Open the winning modal
+*/
 export const winModal = () => {
   showModal(winTitle, winText, winButton);
 }
 
+/**
+* Open the game over modal
+*/
 export const loseModal = () => {
   showModal(loseTitle, loseText, loseButton);
 }
 
+/**
+* Open a modal with the provided strings.
+* Clones the overlay and modal node, adds the text, then shows the overlay and modal.
+* Adds a listener to the modal button to close the modal
+*/
 function showModal(title, text, buttonText) {
   // copy template
   const modal = document.querySelector('.overlay').cloneNode(true);
@@ -45,14 +56,15 @@ function showModal(title, text, buttonText) {
   modal.querySelector('button').innerHTML = buttonText;
 
   // show modal
-  console.log('Showing modal with title ' + title);
   html.insertBefore(modal, body);
 
   // add button listener
   modal.querySelector('#reset').addEventListener('click', closeModal);
 }
 
-function closeModal(event) {
-  console.log('Closing modal');
+/**
+ * Handler for closing the modal
+ */
+function closeModal() {
   document.querySelector('.show-modal').remove();
 }
