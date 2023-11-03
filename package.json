@@ -1,8 +1,12 @@
 {
   "name": "js-dev-b2b-final-capstone",
   "version": "1.0.0",
+  "type": "module",
   "description": "js-dev-b2b-final-capstone qualified challenge",
-  "dependencies": {},
+  "dependencies": {
+    "difficulty": "^1.2.0"
+  },
+  
   "devDependencies": {
     "jest": "^29.0.0",
     "jest-puppeteer": "^6.0.0",

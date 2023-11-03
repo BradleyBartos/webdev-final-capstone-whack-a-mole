@@ -54,9 +54,9 @@ describe("US-01: Basic Game Structure", () => {
     expect(start).toEqual(1);
   });
 
-  it("has a 'score' <span id='score'>0</span>", async () => {
+  it("has a 'score' <span id='count'>0</span>", async () => {
     const score = await page.evaluate(() => {
-      const score = document.querySelectorAll("#score");
+      const score = document.querySelectorAll("#count");
       return score.length;
      });
     expect(score).not.toBeNull();
@@ -207,7 +207,7 @@ describe("US-03: startGame() and gameOver()", () => {
 
   it("returns 'game stopped' if time = 0 // gameOver() function", async () => {
     const gameOver = await page.evaluate(() => {
-      window.setDuration(0);
+      window.setDuration('hard');
       return window.gameOver();
     });
     expect(gameOver).toContain("game stopped");
@@ -228,23 +228,23 @@ describe("US-04: updateScore() and clearScore()", () => {
 
   it("should increment score when calling updateScore()", async () => {
     let content = await page.content();
-    expect(content).toContain('<span id="score">0</span>');
-    const points = await page.evaluate(() => {
+    expect(content).toContain('<span id="count">20</span>');
+    const remainder = await page.evaluate(() => {
       return window.updateScore();
     });
-    expect(points).toEqual(1);
+    expect(remainder).toEqual(19);
     content = await page.content();
-    expect(content).toContain('<span id="score">1</span>');
+    expect(content).toContain('<span id="count">19</span>');
   });
 
   it("should clear score when calling clearScore()", async () => {
-    const points = await page.evaluate(() => {
-      window.points = 9;
+    const remainder = await page.evaluate(() => {
+      window.remainder = 9;
       return window.clearScore();
     });
-    expect(points).toEqual(0);
+    expect(remainder).toEqual(20);
     const content = await page.content();
-    expect(content).toContain('<span id="score">0</span>');
+    expect(content).toContain('<span id="count">20</span>');
   });
 });
 
@@ -258,13 +258,13 @@ describe("US-04 whack()", () => {
 
   it("should increment score when calling whack()", async () => {
     let content = await page.content();
-    expect(content).toContain('<span id="score">0</span>');
-    const points = await page.evaluate(() => {
+    expect(content).toContain('<span id="count">20</span>');
+    const remainder = await page.evaluate(() => {
       return window.whack();
     });
-    expect(points).toEqual(1);
+    expect(remainder).toEqual(19);
     content = await page.content();
-    expect(content).toContain('<span id="score">1</span>');
+    expect(content).toContain('<span id="count">19</span>');
   });
 
   it("should call setEventListeners() in the startGame() function", async () => {
@@ -275,14 +275,14 @@ describe("US-04 whack()", () => {
   });
 
   it("should increment score when clicking on mole", async () => {
-    const points = await page.evaluate(() => {
+    const remainder = await page.evaluate(() => {
       window.startGame();
       const mole = document.querySelectorAll(".mole")[0];
       mole.click();
-      const points = document.querySelector("#score").innerHTML;
-      return points;
+      const remainder = document.querySelector("#count").innerHTML;
+      return remainder;
     });
-    expect(points).toEqual("1");
+    expect(remainder).toEqual("19");
   });
 });
 
