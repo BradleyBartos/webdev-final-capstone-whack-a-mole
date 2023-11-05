@@ -15,8 +15,8 @@ const loseText = 'The grubs have bred like, well, bugs and all the taters are go
   'Worst of all, Susie didn\'t lay any eggs. We\'re broke and hungry.'
 const loseButton = 'Try Again';
 
-const html = document.querySelector('html');
 const body = document.querySelector('body');
+const main = document.querySelector('main');
 const button = document.querySelector('.modal button');
 
 /**
@@ -56,7 +56,7 @@ function showModal(title, text, buttonText) {
   modal.querySelector('button').innerHTML = buttonText;
 
   // show modal
-  html.insertBefore(modal, body);
+  body.insertBefore(modal, main);
 
   // add button listener
   modal.querySelector('#reset').addEventListener('click', closeModal);
