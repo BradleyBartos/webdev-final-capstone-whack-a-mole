@@ -1,3 +1,5 @@
+import { playOpener } from "./audio";
+
 const openTitle = 'Welcome to the Potato Farm';
 const openText = 'Oh no! The farm has been infested by grubs!<br>' + 
   'We have to collect the wriggly monsters before they eat all the taters. ' +
@@ -53,13 +55,14 @@ function showModal(title, text, buttonText) {
   modal.classList.add('show-modal');
   modal.querySelector('h2').innerHTML = title;
   modal.querySelector('p').innerHTML = text;
-  modal.querySelector('button').innerHTML = buttonText;
+  modal.querySelector('.primary').innerHTML = buttonText;
 
   // show modal
   body.insertBefore(modal, main);
 
   // add button listener
-  modal.querySelector('#reset').addEventListener('click', closeModal);
+  modal.querySelector('.start-music').addEventListener('click', playOpener);
+  modal.querySelector('#reset .primary').addEventListener('click', closeModal);
 }
 
 /**

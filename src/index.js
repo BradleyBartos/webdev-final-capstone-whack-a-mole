@@ -1,6 +1,7 @@
-import {easyTime, setDuration, setDelay, setRemainder} from './difficultySwitches.js';
+import { easyTime, setDuration, setDelay, setRemainder } from './difficultySwitches.js';
 import { startTimer, updateTimer, getTime, setTime } from './timing.js';
 import { loseModal, welcomeModal, winModal } from './modals.js';
+import { playOpener, playGameTrack, playButton } from './audio.js';
 
 const holes = document.querySelectorAll('.hole');
 const moles = document.querySelectorAll('.mole');
@@ -13,15 +14,19 @@ let timer;
 let remainder = 0;
 let difficulty = 'easy';
 
-// Open welcome modal first
-welcomeModal();
+window.addEventListener('DOMContentLoaded', main());
 
-// Setup buttons and text
-setTime(easyTime);
-updateTimer();
-clearScore();
-startButton.addEventListener('click', startGame);
-diffs.forEach(button => button.addEventListener('click', event => setDifficulty(event.target.value)));
+function main() {
+  // Open welcome modal
+  welcomeModal();
+
+  // Setup buttons and text
+  setTime(easyTime);
+  updateTimer();
+  clearScore();
+  startButton.addEventListener('click', startGame);
+  diffs.forEach(button => button.addEventListener('click', event => setDifficulty(event.target.value)));
+}
 
 /**
 *
@@ -30,12 +35,13 @@ diffs.forEach(button => button.addEventListener('click', event => setDifficulty(
 *
 */
 function startGame() {
-  // disable menu and set the correct values, just in case
+  // disable menu, set the correct values
   startButton.setAttribute('disabled', true);
   diffs.forEach(button => button.setAttribute('disabled', true));
   updateTimer();
   clearScore();
 
+  // start up game
   setEventListeners();
   timer = startTimer();
   showUp();

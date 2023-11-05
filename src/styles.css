@@ -1,5 +1,5 @@
 html {
-  background: url('../assets/soilFarmland.jpeg') no-repeat center center fixed;
+  background: url('../assets/00010-2023-11-05-[number]-1490369895.jpg') no-repeat center center fixed;
   box-sizing: border-box;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -71,13 +71,13 @@ button:active {
 }
 
 .primary {
-    text-align: center;
-    font-size: 30px;
-    padding: 0 5%;
+  text-align: center;
+  font-size: 30px;
+  padding: 0 5%;
 }
 
 #timer{
-    color: white;
+  color: white;
 }
 
 .grid {
@@ -178,6 +178,19 @@ footer {
   background-color: #fff;
 }
 
+.play {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  position: absolute;
+  bottom: 1px; left: 5px;
+}
+
+.play img {
+  width: 100%;
+  height: 100%;
+}
+
 footer p {
   margin: 5px;
 }
@@ -212,6 +225,7 @@ footer p {
     text-align: center;
     display: flex;
     width: 300px;
+    margin: 0 10px;
   }
   
   fieldset button {
