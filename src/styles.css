@@ -170,6 +170,7 @@ button:active {
 }
 
 .modal h2 {
+  font-size: 22px;
   margin-top: 20px;
   color: #000;
 }
@@ -274,6 +275,10 @@ footer p {
   .modal {
     box-sizing: border-box;
     width: 75%;
+  }
+
+  .modal h2 {
+    font-size: 30px;
   }
 
   .modal button {
