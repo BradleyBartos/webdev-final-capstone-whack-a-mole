@@ -166,8 +166,8 @@ function toggleVisibility(hole){
 *
 * This function is called when the game is stopped. 
 * Displays the winning or losing message
-* Clears the timer using clearInterval. 
-* Returns "game stopped".
+* Clears the timer using clearInterval
+* Resets the time and difficulty
 *
 */
 function stopGame() {
@@ -176,7 +176,7 @@ function stopGame() {
   startButton.removeAttribute('disabled');
   diffs.forEach(button => button.removeAttribute('disabled'));
   clearInterval(timer);
-  // setDifficulty();
+  setDifficulty();
 }
 
 /**
