@@ -105,7 +105,7 @@ button:active {
   position: absolute;
   bottom: -40%;
   z-index: 2;
-  pointer-events:none;
+  pointer-events: none;
 }
 
 .mole {
@@ -176,6 +176,12 @@ footer {
   text-align: center;
   color: #000;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+audio {
+  height: 15px;
 }
 
 .play {
@@ -241,5 +247,15 @@ footer p {
   .modal {
     box-sizing: border-box;
     width: 75%;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .footer p {
+    justify-self: right;
+    flex: 1 1 auto
   }
 }

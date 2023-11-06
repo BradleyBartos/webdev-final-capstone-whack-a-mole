@@ -2,11 +2,11 @@ import { randomInteger } from "./difficultySwitches";
 
 const audioLoc = "https://github.com/BradleyBartos/webdev-final-capstone-whack-a-mole/tree/main/assets/audio/";
 const audioEle = document.querySelector('audio');
-const audioSrc = audioEle.querySelector('source');
-const opener = new Audio(audioLoc + "LoboLocoFreeGuitarWalkingBluesF015.mp3?raw=true");
-const easy = new Audio(audioLoc + "OvMoiOmmIWasDifferent.mp3?raw=true");
-const normal = new Audio(audioLoc + "MidAirMachineAppalachianCoalMines.mp3?raw=true");
-const hard = new Audio(audioLoc + "IHaveFoundAWayTruncated.mp3?raw=true");
+const audioSrc = audioEle.querySelectorAll('source');
+const opener = audioLoc + "LoboLocoFreeGuitarWalkingBluesF015.mp3?raw=true";
+const easy = audioLoc + "OvMoiOmmIWasDifferent.mp3?raw=true";
+const normal = audioLoc + "MidAirMachineAppalachianCoalMines.mp3?raw=true";
+const hard = audioLoc + "IHaveFoundAWayTruncated.mp3?raw=true";
 const chickens = [
   new Audio(audioLoc + "chicken1.mp3"),
   new Audio(audioLoc + "chicken2.mp3"),
@@ -53,15 +53,9 @@ export const playRandChicken = () => {
 
 export const playButton = () => {
   console.log(`Current audio file is ${currentAudio}`)
-  audioEle = currentAudio;
-  currentAudio.pause();
-  currentAudio.load();
-  currentAudio.controls = true;
-  currentAudio.loop = true;
-  currentAudio.play();
-  // audioEle.pause();
-  // audioSrc.setAttribute('src', currentAudio);
-  // audioEle.load();
-  // audioEle.loop = true;
-  // audioEle.play();
+  audioEle.pause();
+  audioSrc[0].src = currentAudio;
+  audioSrc[1].src = currentAudio.replace('.mp3', '.ogg');
+  audioEle.load();
+  audioEle.play();
 }

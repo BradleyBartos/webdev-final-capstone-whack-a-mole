@@ -8,6 +8,7 @@ const moles = document.querySelectorAll('.mole');
 const diffs = document.querySelectorAll('.difficulty');
 const startButton = document.querySelector('#start');
 const count = document.querySelector('#count');
+const audio = document.querySelector('audio');
 
 let lastHole = -1;
 let timer;
@@ -25,6 +26,7 @@ function main() {
   updateTimer();
   clearScore();
   startButton.addEventListener('click', startGame);
+  audio.addEventListener('click', playButton);
   diffs.forEach(button => button.addEventListener('click', event => setDifficulty(event.target.value)));
 }
 
