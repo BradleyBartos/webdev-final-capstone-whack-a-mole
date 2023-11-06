@@ -128,7 +128,7 @@ button:active {
   /*transform: scale(1.1);*/
 }
 
-.chicken {
+.susie {
   height: 125px;
   width: 125px;
   position: absolute;
@@ -136,7 +136,7 @@ button:active {
   z-index: -1;
 }
 
-.chicken img {
+.susie img {
   height: 100%;
   width: 100%;
 }
@@ -269,7 +269,7 @@ footer p {
     height: 400px;
   }
 
-  .chicken {
+  .susie {
     height: 200px;
     width: 200px;
     position: absolute;

@@ -1,5 +1,11 @@
 import { playOpener } from "./audio";
 
+const artists = 'Thanks to the muscicians who licensed their music with creative commons!<br>' + 
+  'Ov Moi Omm with I Was Different, ' + 
+  'Lobo Loco with Free Guitar Walking Blues (F 015), ' + 
+  'Mid-Air Machine with Appalachian Coal Mines, ' +
+  'and Jacob Henry and Bill Joliff with I have Found a Way';
+
 const openTitle = 'Welcome to the Potato Farm';
 const openText = 'Oh no! The farm has been infested by grubs!<br>' + 
   'We have to collect the wriggly monsters before they eat all the taters. ' +
@@ -10,17 +16,13 @@ const openButton = 'Continue';
 const winTitle = 'You Did It!';
 const winText = 'You cleared enough of those grubs to save the taters.<br>' +
   'Time to wash up, I\'m making omelets from some of Susie\'s fine eggs.<br><br>' +
-  'Thanks to the artists who supplied the music: Ov Moi Omm with I Was Different, ' + 
-  'Lobo Loco with Free Guitar Walking Blues (F 015), Mid-Air Machine with Appalachian Coal Mines, ' +
-  'and Jacob Henry and Bill Joliff with I have Found a Way!';
+  artists;
 const winButton = 'Reset Game';
 
 const loseTitle = 'Gosh darn it!';
 const loseText = 'The grubs have bred like, well, bugs and all the taters are gone.<br>' +
   'Worst of all, Susie didn\'t lay any eggs. We\'re broke and hungry.<br><br>' +
-  'Thanks to the artists who supplied the music: Ov Moi Omm with I Was Different, ' + 
-  'Lobo Loco with Free Guitar Walking Blues (F 015), Mid-Air Machine with Appalachian Coal Mines, ' +
-  'and Jacob Henry and Bill Joliff with I have Found a Way!';
+  artists;
 const loseButton = 'Try Again';
 
 const body = document.querySelector('body');
