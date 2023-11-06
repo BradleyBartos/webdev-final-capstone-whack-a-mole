@@ -129,10 +129,10 @@ button:active {
 }
 
 .chicken {
-  height: 100px;
-  width: 100px;
+  height: 125px;
+  width: 125px;
   position: absolute;
-  right: 0px; top: 20vh;
+  right: 0px; top: 17vh;
   z-index: -1;
 }
 
@@ -228,7 +228,7 @@ footer p {
 @media screen and (min-width: 720px) {
 
   h1 {
-    font-size: 90px;
+    font-size: 80px;
   }
 
   h2 {
