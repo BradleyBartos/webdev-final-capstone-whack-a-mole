@@ -1,14 +1,13 @@
 import { easyTime, setDuration, setDelay, setRemainder } from './difficultySwitches.js';
 import { startTimer, updateTimer, getTime, setTime } from './timing.js';
 import { loseModal, welcomeModal, winModal } from './modals.js';
-import { playOpener, playGameTrack, playButton } from './audio.js';
+import { playGameTrack, playRandChicken, stopAudio } from './audio.js';
 
 const holes = document.querySelectorAll('.hole');
 const moles = document.querySelectorAll('.mole');
 const diffs = document.querySelectorAll('.difficulty');
 const startButton = document.querySelector('#start');
 const count = document.querySelector('#count');
-const audio = document.querySelector('audio');
 
 let lastHole = -1;
 let timer;
@@ -26,7 +25,6 @@ function main() {
   updateTimer();
   clearScore();
   startButton.addEventListener('click', startGame);
-  audio.addEventListener('click', playButton);
   diffs.forEach(button => button.addEventListener('click', event => setDifficulty(event.target.value)));
 }
 
@@ -47,6 +45,7 @@ function startGame() {
   setEventListeners();
   timer = startTimer();
   showUp();
+  playGameTrack(difficulty);
   return "game started";
 }
 
@@ -172,12 +171,12 @@ function toggleVisibility(hole){
 *
 */
 function stopGame() {
-  // stopAudio(song);  //optional
+  stopAudio();
   remainder <= 0 ? winModal() : loseModal();
   startButton.removeAttribute('disabled');
   diffs.forEach(button => button.removeAttribute('disabled'));
   clearInterval(timer);
-  setDifficulty();
+  // setDifficulty();
 }
 
 /**
@@ -191,6 +190,7 @@ function stopGame() {
 */
 function whack(event) {
   event.target.style.pointerEvents = 'none';
+  playRandChicken();
   updateScore();
   return remainder;
 }
