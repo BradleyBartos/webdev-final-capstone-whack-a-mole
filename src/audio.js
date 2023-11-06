@@ -1,4 +1,4 @@
-import { randomInteger } from "./difficultySwitches";
+import { randomInteger } from "./difficultySwitches.js";
 
 const opener = document.querySelector('#opener')
 const easy = document.querySelector('#easy')

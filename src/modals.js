@@ -1,4 +1,4 @@
-import { playOpener } from "./audio";
+import { playOpener } from "./audio.js";
 
 const artists = 'Thanks to the muscicians who licensed their music with creative commons!<br>' + 
   'Ov Moi Omm with I Was Different, ' + 
